@@ -1,0 +1,42 @@
+<h1>Live</h1>
+<a href="https://tiitrafficdata.azurewebsites.net/api/Weather">*</a>
+<hr />
+<h3>Site:</h3>
+<input
+  type="text"
+  class="form-control"
+  placeholder=" site name"
+  [(ngModel)]="searchTerm"
+/>
+<hr />
+<table class="table-striped table">
+  <thead>
+    <th>Site</th>
+    <th>Air Temperature</th>
+    <th>Road Temperature</th>
+    <th>Wind Speed km/h</th>
+    <th>Wind Direction</th>
+    <th>Description</th>
+    <th></th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let a of filterStations()">
+      <td>{{ a.properties.site_name }}</td>
+      <td>{{ a.properties.air_temperature | number : "1.1-1" }}</td>
+      <td>{{ a.properties.road_surface_temperature | number : "1.1-1" }}</td>
+      <td>{{ a.properties.wind_speed | number : "1.1-1" }}</td>
+      <td>{{ windBearing(a.properties.wind_direction_bearing) }}</td>
+      <td>{{ a.properties.weather_definition }}</td>
+      <td>
+        <ng-container *ngIf="a.properties.camera_image; else blank">
+          <a href="{{ a.properties.camera_image }}"
+            ><img
+              src="assets/cam.png"
+              style="width: 25px"
+              alt="{{ a.properties.site_name }}"
+          /></a> </ng-container
+        ><ng-template #blank>no image</ng-template>
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,41 @@
+<h1>{{ this.actualDate | date : "longDate" }}</h1>
+<button class="btn btn-primary btn-sm" (click)="backDay()"><<</button>
+&zwnj;
+<button class="btn btn-primary btn-sm" (click)="forwardDay()">>></button>
+<hr />
+<table class="table-striped table">
+  <thead>
+    <th>Site Name</th>
+    <th>
+      <button class="btn" (click)="sortByAirAsc()"><h6>↑</h6></button> Air
+      Temperature
+      <button class="btn" (click)="sortByAirDesc()"><h6>↓</h6></button>
+    </th>
+    <th>
+      <button class="btn" (click)="sortByRoadAsc()"><h6>↑</h6></button> Road
+      Temperature
+      <button class="btn" (click)="sortByRoadDesc()"><h6>↓</h6></button>
+    </th>
+    <th>
+      <button class="btn" (click)="sortByWindAsc()"><h6>↑</h6></button> Wind
+      Speed km/h
+      <button class="btn" (click)="sortByWindDesc()"><h6>↓</h6></button>
+    </th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let Today of todays">
+      <td>
+        <a
+          class="nav"
+          href="today/{{ Today.site_name }}/{{ this.actualDate }}"
+          >{{ Today.site_name }}</a
+        >
+      </td>
+      <td>{{ Today.air_temperature }}</td>
+      <td>
+        {{ Today.road_surface_temperature }}
+      </td>
+      <td>{{ Today.wind_speed }}</td>
+    </tr>
+  </tbody>
+</table>

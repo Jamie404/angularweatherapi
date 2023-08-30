@@ -1,0 +1,26 @@
+<h1>@{{ this.site }} {{ this.date | date : "mediumDate" }}</h1>
+<hr />
+<table class="table-striped table">
+  <thead>
+    <th>Time</th>
+    <th>Air Temperature °C({{ avgAirTemp }})</th>
+    <th>Road Temperature °C({{ avgRoadTemp }})</th>
+    <th>Wind Speed km/h ({{ avgWindSpeed }})</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let chosen of chosenTable">
+      <td>{{ chosen.timenow }}</td>
+      <td>{{ chosen.air_temperature }}</td>
+      <td>{{ chosen.road_surface_temperature }}</td>
+      <td>{{ chosen.wind_speed }}</td>
+    </tr>
+  </tbody>
+</table>
+<hr />
+<h2>Air Temperature by the Hour</h2>
+<br />
+<div>
+  <div id="line"></div>
+</div>
+<hr />
+<hr />

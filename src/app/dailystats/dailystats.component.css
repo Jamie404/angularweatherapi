@@ -1,0 +1,33 @@
+svg {
+  font-family: sans-serif;
+}
+
+rect {
+  fill: steelblue;
+}
+
+text {
+  fill: black;
+  font-size: 12px;
+  text-anchor: middle;
+}
+
+.line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 2px;
+}
+.main-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+.main-container {
+  position: relative;
+  z-index: 1;
+}
+.svg-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}

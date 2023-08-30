@@ -1,0 +1,87 @@
+<h1>Daily Data</h1>
+<label>Site Data:</label>
+<br />
+<select
+  class="form-control"
+  style="width: 100%"
+  (change)="getSelectedValue($event)"
+>
+  <option>Choose a site..</option>
+  <option *ngFor="let name of siteNames" value="{{ name.site_name }}">
+    {{ name.site_name }}
+  </option>
+</select>
+<label>Date:</label><br />
+<input
+  class="form-control"
+  type="date"
+  style="width: 100%"
+  [(ngModel)]="dateInput"
+/>
+<br /><br />
+<button class="btn btn-primary" (click)="clearSvg(); getData(); getWind()">
+  Go
+</button>
+<hr />
+<table class="table-striped table">
+  <thead>
+    <th>Date</th>
+    <th>Min.AirTemp(°C)</th>
+    <th>Max.AirTemp(°C)</th>
+    <th>Mean Wind Speed (km/h)</th>
+  </thead>
+  <tbody>
+    <ng-container *ngIf="this.dateInput !== ''; else blank">
+      <tr>
+        <td>{{ this.dateInput | date : "mediumDate" }}</td>
+        <td>{{ this.minAir }}</td>
+        <td>{{ this.maxAir }}</td>
+        <td>{{ this.windAvg }}</td>
+        <td>{{ this.speed }}</td>
+      </tr> </ng-container
+    ><ng-template #blank>
+      <tr>
+        <td>-</td>
+        <td>-</td>
+        <td>-</td>
+        <td>-</td>
+        <td>-</td>
+      </tr>
+    </ng-template>
+  </tbody>
+</table>
+<br />
+<h2 [hidden]="hidden">Wind Speed Column Chart</h2>
+<div id="bar"></div>
+
+<br />
+
+<!-- ****ATTEMPTED D3, UNCOMMENT BELOW TO SEE SVG VERSION**** -->
+
+<!-- <svg width="100%" attr.height="{{ this.maxWind }}">
+  <g *ngFor="let item of windSpeeds; index as i">
+    <rect
+      [attr.x]="i * 35"
+      [attr.y]="maxWind - item.wind_speed * 20"
+      [attr.height]="item.wind_speed * 20"
+      [attr.width]="30"
+    ></rect>
+    <text [ariaSetSize]="10" [attr.x]="18" [attr.y]="windTemp - 3">Mean</text>
+    <path
+      attr.d="M0 {{ this.windTemp }} l {{ this.widthCheck }} 0"
+      stroke="black"
+      stroke-width="0.25"
+      stroke-dasharray="4,4"
+    />
+  </g>
+  <g *ngFor="let item of windSpeeds; index as i">
+    <text [attr.x]="i * 35 + 15" [attr.y]="maxWind - 3">
+      {{ item.wind_speed }}
+    </text>
+  </g>
+</svg> -->
+
+<br />
+<h2 [hidden]="hidden">Wind Speed Line Chart</h2>
+
+<div id="line" [hidden]="hidden"></div>

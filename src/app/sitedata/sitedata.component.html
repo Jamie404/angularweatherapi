@@ -1,0 +1,104 @@
+<h1>Site Data</h1>
+<hr />
+Site:
+<br />
+<select
+  class="form-control"
+  style="width: 100%"
+  (change)="getSelectedValue($event)"
+>
+  <option>Choose a site..</option>
+  <option *ngFor="let name of siteNames" value="{{ name.site_name }}">
+    {{ name.site_name }}
+  </option>
+</select>
+<br />
+<br />
+<input
+  type="radio"
+  id="air"
+  name="rad"
+  class="radio"
+  value="1"
+  checked="checked"
+  (click)="radioCheck($event)"
+/>
+<label for="air">&nbsp; Air Temperature &nbsp; </label>
+<input
+  type="radio"
+  id="wind"
+  name="rad"
+  class="radio"
+  value="2"
+  (click)="radioCheck($event)"
+/>
+<label for="wind">&nbsp; Wind Speed&nbsp; </label>
+<br />
+
+<ng-container *ngIf="this.radio != 2; else blank3"
+  ><label
+    >Air Temperature <=
+    <ng-container *ngIf="this.maxAir != ''; else blank1"
+      ><label [innerHTML]="tMaxAir"></label></ng-container
+    ><ng-template #blank1>0</ng-template>°C</label
+  ></ng-container
+><ng-template #blank3
+  ><label
+    >Wind Speed <=
+    <ng-container *ngIf="this.maxWind != ''; else blank4"
+      ><label [innerHTML]="tMaxWind"></label></ng-container
+    ><ng-template #blank4>0</ng-template> km/h</label
+  ></ng-template
+>
+
+<br />
+<ng-container *ngIf="this.radio != 2; else blank5">
+  <input
+    type="range"
+    class="form-control-range"
+    style="width: 100%"
+    [max]="maxAir"
+    [min]="minAir"
+    [(ngModel)]="tMaxAir"
+    (change)="changeMax($event)"
+    step="0.1" /></ng-container
+><ng-template #blank5
+  ><input
+    type="range"
+    class="form-control-range"
+    style="width: 100%"
+    [max]="maxWind"
+    [min]="minWind"
+    [(ngModel)]="tMaxWind"
+    (change)="changeMax($event)"
+    step="0.1"
+  />
+</ng-template>
+<table class="table-striped table">
+  <thead>
+    <th>Date & Time</th>
+    <th>
+      <button class="btn" (click)="sortByAirAsc()">↑</button> Air Temperature°C
+      <button class="btn" (click)="sortByAirDesc()">↓</button>
+    </th>
+    <th>
+      <button class="btn" (click)="sortByRoadAsc()">↑</button> Road
+      Temperature°C
+      <button class="btn" (click)="sortByRoadDesc()">↓</button>
+    </th>
+    <th>
+      <button class="btn" (click)="sortByWindAsc()">↑</button> Wind Speed km/h
+      <button class="btn" (click)="sortByWindDesc()">↓</button>
+    </th>
+  </thead>
+  <tbody>
+    <ng-container *ngIf="this.searchTerm != ''; else blank2">
+      <tr *ngFor="let site of filterTable()">
+        <td>{{ site.datenow | date : "mediumDate" }} {{ site.timenow }}</td>
+        <td>{{ site.air_temperature }}</td>
+        <td>{{ site.road_surface_temperature }}</td>
+        <td>{{ site.wind_speed }}</td>
+      </tr> </ng-container
+    ><ng-template #blank2></ng-template>
+  </tbody>
+</table>

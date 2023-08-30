@@ -1,0 +1,71 @@
+<h1>Statistics</h1>
+<hr />
+<h3>National Statistics</h3>
+<table class="table-striped table">
+  <thead>
+    <th>Weather Measure</th>
+    <th>Min</th>
+    <th>Max</th>
+    <th>Avg</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Air Temperature</td>
+      <td>{{ minAirTemp }}</td>
+      <td>{{ maxAirTemp }}</td>
+      <td>{{ avgAirTemp }}</td>
+    </tr>
+    <tr>
+      <td>Road Temperature</td>
+      <td>{{ minRoadTemp }}</td>
+      <td>{{ maxRoadTemp }}</td>
+      <td>{{ avgRoadTemp }}</td>
+    </tr>
+    <tr>
+      <td>Wind Speed</td>
+      <td>{{ minWindSpeed }}</td>
+      <td>{{ maxWindSpeed }}</td>
+      <td>{{ avgWindSpeed }}</td>
+    </tr>
+  </tbody>
+</table>
+<hr />
+<h3>Site Statistics</h3>
+<table class="table-striped table">
+  <thead>
+    <th>Description</th>
+    <th>Site</th>
+    <th>Value</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Coldest</td>
+      <td>{{ minAirSite }}</td>
+      <td>{{ minAirTemp }}</td>
+    </tr>
+    <tr>
+      <td>Warmest</td>
+      <td>{{ maxAirSite }}</td>
+      <td>{{ maxAirTemp }}</td>
+    </tr>
+    <tr>
+      <td>Windiest</td>
+      <td>{{ maxWindSite }}</td>
+      <td>{{ maxWindSpeed }}</td>
+    </tr>
+  </tbody>
+</table>
+<hr />
+
+<div
+  class="text-center p-3"
+  style="
+    position: absolute;
+    bottom: 0px;
+    width: 80%;
+    text-decoration: none;
+    color: #818181;
+  "
+>
+  L00150620 - © 2023 Copyright:
+</div>
